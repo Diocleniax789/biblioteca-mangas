@@ -3,7 +3,16 @@
 
 void menu_principal();
 
+struct manga{
+    char nombre[50];
+    char autor[50];
+    char editorial[20];
+    char ISBN[13];
+    int nro_tomo;
+};
+
 int main(){
+    struct manga mangas[500];
      menu_principal();
 
     return 0;
@@ -14,6 +23,7 @@ void menu_principal(){
 
     do {
         system("cls");
+        printf("---------------------------------------------------------------------\n");
         printf("|1| -                    Cargar biblioteca                      - |1|\n");
         printf("---------------------------------------------------------------------\n");
         printf("|2| -        Ver biblioteca y escoger un manga para leer        - |2|\n");
@@ -36,9 +46,11 @@ void menu_principal(){
         } while(op < 1 && op > 6);
         switch(op){
             case 1:
+
+
             break;
 
-            case 2:
+          /*  case 2:
             break;
 
             case 3:
@@ -48,7 +60,7 @@ void menu_principal(){
             break;
 
             case 5:
-            break;
+            break;*/
         }
 
     } while( op =! 6);
