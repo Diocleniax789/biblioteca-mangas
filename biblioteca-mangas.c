@@ -104,7 +104,10 @@ int verificar_estantes(struct manga* mangas, int* indice) {
     for (i = 0; i < *indice; i++) {
         if (mangas[i].colocado == 0) {
             contador_casillas_vacias++;
+        } else {
+            contador_casillas_vacias--;
         }
+
     }
 
     if (contador_casillas_vacias > 0) {
@@ -187,16 +190,17 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
         printf("%i\n",mangas[i].cant_paginas);
         printf("%i\n",mangas[i].colocado);
     }
+    system("pause");
 }
 
 void ver_y_escojer_manga(){
     int total_mangas = TOTAL_MANGAS;
     int mangas_cargados = verificar_estantes(biblioteca, &total_mangas);
 
-    if(mangas_cargados == 1){
+    if(mangas_cargados == 1 ){
         printf("\n# ACTUALMENTE LA BIBLIOTECA ESTA VACIA. INTENTE MAS TARDE #\n");
         Sleep(2000);
-    } else{
+    } else {
         mostrar_biblioteca(biblioteca,&total_mangas);
     }
 }
