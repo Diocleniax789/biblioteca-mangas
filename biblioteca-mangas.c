@@ -4,6 +4,7 @@
 #include <windows.h>
 
 #define TOTAL_MANGAS 2
+#define TOTAL_MANGAS_POR_LEER 10
 
 struct manga {
     char nombre[50];
@@ -15,11 +16,21 @@ struct manga {
     int colocado;
 };
 
+struct manga_leido_no_leido {
+    char nombre[50];
+    int nro_tomo;
+    int cantidad_paginas_leidas;
+    int colocar;
+};
+
 struct manga biblioteca[TOTAL_MANGAS];
+struct manga_leido_no_leido lista_leidos[TOTAL_MANGAS_POR_LEER];
 void menu_principal();
 void cargar_biblioteca();
 struct manga* agregar_a_la_biblioteca(struct manga*, int*);
 int verificar_estantes(struct manga*, int*);
+void mostrar_biblioteca(struct manga*,int*);
+void ver_y_escojer_manga();
 
 int main() {
     for (int i = 0; i < TOTAL_MANGAS; i++) {
@@ -60,6 +71,11 @@ void menu_principal() {
             case 1:
                 system("cls");
                 cargar_biblioteca();
+                break;
+
+            case 2:
+                system("cls");
+                ver_y_escojer_manga();
                 break;
 
             /* Otros casos del menú aquí */
@@ -156,4 +172,31 @@ struct manga* agregar_a_la_biblioteca(struct manga* mangas, int* indice) {
     printf("\n# No quedan más casillas vacías en la biblioteca #\n");
     Sleep(2000);
     return mangas;
+}
+
+void mostrar_biblioteca(struct manga* mangas,int *indice){
+    int i;
+
+    for(i = 0; i < *indice; i++){
+        printf("\n===================================================\n");
+        printf("%s\n",mangas[i].nombre);
+        printf("%s\n",mangas[i].autor);
+        printf("%s\n",mangas[i].editorial);
+        printf("%s\n",mangas[i].ISBN);
+        printf("%i\n",mangas[i].nro_tomo);
+        printf("%i\n",mangas[i].cant_paginas);
+        printf("%i\n",mangas[i].colocado);
+    }
+}
+
+void ver_y_escojer_manga(){
+    int total_mangas = TOTAL_MANGAS;
+    int mangas_cargados = verificar_estantes(biblioteca, &total_mangas);
+
+    if(mangas_cargados == 1){
+        printf("\n# ACTUALMENTE LA BIBLIOTECA ESTA VACIA. INTENTE MAS TARDE #\n");
+        Sleep(2000);
+    } else{
+        mostrar_biblioteca(biblioteca,&total_mangas);
+    }
 }
