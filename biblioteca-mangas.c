@@ -11,6 +11,7 @@ struct manga {
     char editorial[20];
     char ISBN[13];
     int nro_tomo;
+    int cant_paginas;
     int colocado;
 };
 
@@ -120,9 +121,11 @@ struct manga* agregar_a_la_biblioteca(struct manga* mangas, int* indice) {
             mangas[i].ISBN[strcspn(mangas[i].ISBN, "\n")] = '\0';
             printf(">>> Ingrese nro de tomo: ");
             scanf("%i", &mangas[i].nro_tomo);
+            printf(">>> Cantidad de paginas: ");
+            scanf("%i",&mangas[i].cant_paginas);
 
             do {
-                printf(">>> Colocar? < 1 por si, 0 por no > : ");
+                printf(">>> Colocar? < 1 por si, 0 por no >: ");
                 scanf("%i", &op2);
                 if (op2 != 1 && op2 != 0) {
                     printf("\n X ingrese un valor valido X \n");
