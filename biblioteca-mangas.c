@@ -181,6 +181,7 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
     int i;
 
     for(i = 0; i < *indice; i++){
+      if(mangas[i].colocado == 1){
         printf("\n===================================================\n");
         printf("%s\n",mangas[i].nombre);
         printf("%s\n",mangas[i].autor);
@@ -189,6 +190,8 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
         printf("%i\n",mangas[i].nro_tomo);
         printf("%i\n",mangas[i].cant_paginas);
         printf("%i\n",mangas[i].colocado);
+      }
+
     }
     system("pause");
 }
