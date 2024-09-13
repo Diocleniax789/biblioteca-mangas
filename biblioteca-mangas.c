@@ -98,24 +98,26 @@ void cargar_biblioteca() {
     }
 }
 
+/*Esta funcion tendra dos utilidades, en la opcion 1 de cargar mangas, si cargamos al menos un manga
+y salimos, y al querer cargar nuevamente, la misma debera verificar si hay casillas disponibles, caso contrario
+mostrara un cartel aclaratorio. Ahora, en la opcion 2 de ver la biblioteca, la misma debera ver si la biblioteca esta vacia,
+no mostrara nada, caso contraro mostrara todos los mangas disponibles*/
+
 int verificar_estantes(struct manga* mangas, int* indice) {
-    int i, contador_casillas_vacias = 0;
-
+    int i, mangas_colocados = 0;
     for (i = 0; i < *indice; i++) {
-        if (mangas[i].colocado == 0) {
-            contador_casillas_vacias++;
-        } else {
-            contador_casillas_vacias--;
+        if (mangas[i].colocado == 1) {
+            mangas_colocados++;
         }
-
     }
 
-    if (contador_casillas_vacias > 0) {
-        return 1;
+    if (mangas_colocados > 0) {
+        return 0;  // La biblioteca tiene al menos un manga colocado
     } else {
-        return 0;
+        return 1;  // La biblioteca está vacía
     }
 }
+
 
 struct manga* agregar_a_la_biblioteca(struct manga* mangas, int* indice) {
     int i, op2;
@@ -183,27 +185,25 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
     for(i = 0; i < *indice; i++){
       if(mangas[i].colocado == 1){
         printf("\n===================================================\n");
-        printf("%s\n",mangas[i].nombre);
-        printf("%s\n",mangas[i].autor);
-        printf("%s\n",mangas[i].editorial);
-        printf("%s\n",mangas[i].ISBN);
-        printf("%i\n",mangas[i].nro_tomo);
-        printf("%i\n",mangas[i].cant_paginas);
-        printf("%i\n",mangas[i].colocado);
+        printf("NOMBRE: %s\n",mangas[i].nombre);
+        printf("AUTOR: %s\n",mangas[i].autor);
+        printf("EDITORIAL%s\n",mangas[i].editorial);
+        printf("ISBN: %s\n",mangas[i].ISBN);
+        printf("TOMO:%i\n",mangas[i].nro_tomo);
+        printf("NRO DE PAGINAS: %i\n",mangas[i].cant_paginas);
       }
-
     }
     system("pause");
 }
 
-void ver_y_escojer_manga(){
+void ver_y_escojer_manga() {
     int total_mangas = TOTAL_MANGAS;
-    int mangas_cargados = verificar_estantes(biblioteca, &total_mangas);
+    int biblioteca_vacia = verificar_estantes(biblioteca, &total_mangas);
 
-    if(mangas_cargados == 1 ){
+    if (biblioteca_vacia == 1) {
         printf("\n# ACTUALMENTE LA BIBLIOTECA ESTA VACIA. INTENTE MAS TARDE #\n");
         Sleep(2000);
     } else {
-        mostrar_biblioteca(biblioteca,&total_mangas);
+        mostrar_biblioteca(biblioteca, &total_mangas);
     }
 }
