@@ -99,11 +99,6 @@ void cargar_biblioteca() {
     }
 }
 
-/*Esta funcion tendra dos utilidades, en la opcion 1 de cargar mangas, si cargamos al menos un manga
-y salimos, y al querer cargar nuevamente, la misma debera verificar si hay casillas disponibles, caso contrario
-mostrara un cartel aclaratorio. Ahora, en la opcion 2 de ver la biblioteca, la misma debera ver si la biblioteca esta vacia,
-no mostrara nada, caso contraro mostrara todos los mangas disponibles*/
-
 int verificar_estantes(struct manga* mangas, int* indice) {
     int i, mangas_colocados = 0;
     for (i = 0; i < *indice; i++) {
@@ -113,12 +108,24 @@ int verificar_estantes(struct manga* mangas, int* indice) {
     }
 
     if (mangas_colocados > 0) {
-        return 0;  // La biblioteca tiene al menos un manga colocado
+        return 0;
     } else {
-        return 1;  // La biblioteca está vacía
+        return 1;
     }
 }
 
+int verificar_estantes_vacios(struct manga *mangas, int *indice){
+    int i, estantes_vacios = 0;
+    for(i = 0; i < *indice; i++){
+        if(mangas[i].colocado == 0){
+            estantes_vacios++;
+        }
+    }
+    if(estantes_vacios > 0){
+        return 1;
+    }
+
+}
 
 struct manga* agregar_a_la_biblioteca(struct manga* mangas, int* indice) {
     int i, op2;
@@ -208,17 +215,4 @@ void ver_y_escojer_manga() {
     } else {
         mostrar_biblioteca(biblioteca, &total_mangas);
     }
-}
-
-int verificar_estantes_vacios(struct manga *mangas, int *indice){
-    int i, estantes_vacios = 0;
-    for(i = 0; i < *indice; i++){
-        if(mangas[i].colocado == 0){
-            estantes_vacios++;
-        }
-    }
-    if(estantes_vacios > 0){
-        return 1;
-    }
-
 }
