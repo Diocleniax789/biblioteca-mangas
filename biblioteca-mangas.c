@@ -31,6 +31,7 @@ struct manga* agregar_a_la_biblioteca(struct manga*, int*);
 int verificar_estantes(struct manga*, int*);
 void mostrar_biblioteca(struct manga*,int*);
 void ver_y_escojer_manga();
+int verificar_estantes_vacios(struct manga*, int*);
 
 int main() {
     for (int i = 0; i < TOTAL_MANGAS; i++) {
@@ -88,7 +89,7 @@ void cargar_biblioteca() {
     int total_mangas = TOTAL_MANGAS;
     struct manga* ptr_mangas;
 
-    int biblioteca_cargada = verificar_estantes(biblioteca, &total_mangas);
+    int biblioteca_cargada = verificar_estantes_vacios(biblioteca,&total_mangas);
 
     if (biblioteca_cargada == 1) {
         ptr_mangas = agregar_a_la_biblioteca(biblioteca, &total_mangas);
@@ -156,6 +157,7 @@ struct manga* agregar_a_la_biblioteca(struct manga* mangas, int* indice) {
             mangas[i].colocado = op2;
 
             if (op2 == 1) {
+                printf("\n");
                 printf("\n*** Manga cargado correctamente ***\n");
             }
 
@@ -206,4 +208,17 @@ void ver_y_escojer_manga() {
     } else {
         mostrar_biblioteca(biblioteca, &total_mangas);
     }
+}
+
+int verificar_estantes_vacios(struct manga *mangas, int *indice){
+    int i, estantes_vacios = 0;
+    for(i = 0; i < *indice; i++){
+        if(mangas[i].colocado == 0){
+            estantes_vacios++;
+        }
+    }
+    if(estantes_vacios > 0){
+        return 1;
+    }
+
 }
