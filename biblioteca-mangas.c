@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <ctype.h>
 
 #define TOTAL_MANGAS 2
 #define TOTAL_MANGAS_POR_LEER 10
@@ -24,7 +25,7 @@ struct manga_leido_no_leido {
 };
 
 struct manga biblioteca[TOTAL_MANGAS];
-struct manga_leido_no_leido lista_leidos[TOTAL_MANGAS_POR_LEER];
+struct manga leido_no_leido_lista_leidos[TOTAL_MANGAS_POR_LEER];
 void menu_principal();
 void cargar_biblioteca();
 struct manga* agregar_a_la_biblioteca(struct manga*, int*);
@@ -32,6 +33,7 @@ int verificar_estantes(struct manga*, int*);
 void mostrar_biblioteca(struct manga*,int*);
 void ver_y_escojer_manga();
 int verificar_estantes_vacios(struct manga*, int*);
+int busca_manga(struct manga*, char*, int*);
 
 int main() {
     for (int i = 0; i < TOTAL_MANGAS; i++) {
@@ -189,7 +191,10 @@ struct manga* agregar_a_la_biblioteca(struct manga* mangas, int* indice) {
 }
 
 void mostrar_biblioteca(struct manga* mangas,int *indice){
-    int i;
+    int i,encontrado,manga_encontrado;
+    char op;
+    int ptr_ind = *indice;
+    static char nombre_tomo[50];
 
     for(i = 0; i < *indice; i++){
       if(mangas[i].colocado == 1){
@@ -202,7 +207,27 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
         printf("NRO DE PAGINAS: %i\n",mangas[i].cant_paginas);
       }
     }
-    system("pause");
+    do {
+    do{
+        fflush(stdin);
+        printf("\n Deseas llevar alguno <s/n>?: ");
+        scanf("%c",&op);
+        if(op != 's' && op != 'n'){
+            printf("\n X valor incorrecto. Ingrese nuevamente X\n");
+        }
+    } while(op != 's' && op != 'n');
+    printf("\n Para seleccionar el manga selecciona el que desees llevar y el nro de tomo \n");
+    printf("\n----------------------------------------------------------------------------\n");
+    printf("\n");
+    printf(">>> Ingrese nombre del tomo que deseas llevar: \n");
+    getchar();
+    fgets(nombre_tomo,sizeof(nombre_tomo),stdin);
+    nombre_tomo[strcspn(nombre_tomo, "\n")] = '\0';
+
+    manga_encontrado = busca_manga(biblioteca, nombre_tomo, &ptr_ind);
+
+    } while(op != 'n');
+
 }
 
 void ver_y_escojer_manga() {
@@ -216,3 +241,30 @@ void ver_y_escojer_manga() {
         mostrar_biblioteca(biblioteca, &total_mangas);
     }
 }
+
+int busca_manga(struct manga *mangas, char *nombre_tomo, int *indice){
+    int i,flag,pos;
+
+    flag = 0;
+    pos = 0;
+    do {
+        if(strcmpi(nombre_tomo,mangas[pos].nombre) == 0){
+            flag = 1;
+        } else {
+            pos++;
+        }
+
+    } while(pos < *indice || flag == 1);
+    if(flag == 1){
+        return 1;
+    } else{
+        return 0;
+    }
+
+}
+
+
+
+
+
+
