@@ -33,7 +33,7 @@ int verificar_estantes(struct manga*, int*);
 void mostrar_biblioteca(struct manga*,int*);
 void ver_y_escojer_manga();
 int verificar_estantes_vacios(struct manga*, int*);
-int busca_manga(struct manga*, char*, int*);
+int busca_manga_y_tomo(struct manga*, char*, int*, int);
 
 int main() {
     for (int i = 0; i < TOTAL_MANGAS; i++) {
@@ -195,6 +195,7 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
     char op;
     int ptr_ind = *indice;
     static char nombre_tomo[50];
+    static int tomo;
 
     for(i = 0; i < *indice; i++){
       if(mangas[i].colocado == 1){
@@ -223,8 +224,17 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
     getchar();
     fgets(nombre_tomo,sizeof(nombre_tomo),stdin);
     nombre_tomo[strcspn(nombre_tomo, "\n")] = '\0';
+    printf("Ingrese un numero de tomo: ");
+    scanf("%i",&tomo);
+    getchar();
 
-    manga_encontrado = busca_manga(biblioteca, nombre_tomo, &ptr_ind);
+    manga_encontrado = busca_manga_y_tomo(biblioteca, nombre_tomo, &ptr_ind,tomo);
+
+    if(manga_encontrado == 1){
+        printf("\n *** El manga fue encontrado junto con el tomo ***\n");
+    } else {
+        printf("\n El manga no se ha encontrado \n");
+    }
 
     } while(op != 'n');
 
@@ -242,25 +252,19 @@ void ver_y_escojer_manga() {
     }
 }
 
-int busca_manga(struct manga *mangas, char *nombre_tomo, int *indice){
-    int i,flag,pos;
+int busca_manga_y_tomo(struct manga *mangas, char *nombre_tomo, int *indice, int tomo){
+    int i,flag,pos,compara_cadena;
 
     flag = 0;
     pos = 0;
-    do {
-        if(strcmpi(nombre_tomo,mangas[pos].nombre) == 0){
+    for (i = 0; i < *indice; i++) {
+        if (strcmpi(nombre_tomo, mangas[i].nombre) == 0 && mangas[i].nro_tomo == tomo) {
             flag = 1;
-        } else {
-            pos++;
+            break;
         }
-
-    } while(pos < *indice || flag == 1);
-    if(flag == 1){
-        return 1;
-    } else{
-        return 0;
     }
 
+    return flag;
 }
 
 
