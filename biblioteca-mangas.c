@@ -217,6 +217,8 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
             printf("\n X valor incorrecto. Ingrese nuevamente X\n");
         }
     } while(op != 's' && op != 'n');
+
+    if(op == 's'){
     printf("\n Para seleccionar el manga selecciona el que desees llevar y el nro de tomo \n");
     printf("\n----------------------------------------------------------------------------\n");
     printf("\n");
@@ -235,6 +237,7 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
     } else {
         printf("\n El manga no se ha encontrado \n");
     }
+        }
 
     } while(op != 'n');
 
@@ -263,7 +266,6 @@ int busca_manga_y_tomo(struct manga *mangas, char *nombre_tomo, int *indice, int
             break;
         }
     }
-
     return flag;
 }
 
