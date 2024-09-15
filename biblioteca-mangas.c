@@ -48,6 +48,7 @@ void menu_principal() {
 
     do {
         system("cls");
+        printf("MENU PRINCIPAL\n\n");
         printf("---------------------------------------------------------------------\n");
         printf("|1| -                    Cargar biblioteca                      - |1|\n");
         printf("---------------------------------------------------------------------\n");
