@@ -201,12 +201,12 @@ void mostrar_biblioteca(struct manga* mangas,int *indice){
     for(i = 0; i < *indice; i++){
       if(mangas[i].colocado == 1){
         printf("\n===================================================\n");
-        printf("NOMBRE: %s\n",mangas[i].nombre);
-        printf("AUTOR: %s\n",mangas[i].autor);
-        printf("EDITORIAL%s\n",mangas[i].editorial);
-        printf("ISBN: %s\n",mangas[i].ISBN);
-        printf("TOMO:%i\n",mangas[i].nro_tomo);
-        printf("NRO DE PAGINAS: %i\n",mangas[i].cant_paginas);
+        printf("--> NOMBRE: %s\n",mangas[i].nombre);
+        printf("--> AUTOR: %s\n",mangas[i].autor);
+        printf("--> EDITORIAL%s\n",mangas[i].editorial);
+        printf("--> ISBN: %s\n",mangas[i].ISBN);
+        printf("--> TOMO:%i\n",mangas[i].nro_tomo);
+        printf("--> NRO DE PAGINAS: %i\n",mangas[i].cant_paginas);
       }
     }
     do {
