@@ -48,6 +48,8 @@ void menu_principal() {
 
     do {
         system("cls");
+        printf("BIBLIOTECA MANGAS\n");
+        printf("=================\n\n");
         printf("MENU PRINCIPAL\n\n");
         printf("---------------------------------------------------------------------\n");
         printf("|1| -                    Cargar biblioteca                      - |1|\n");
