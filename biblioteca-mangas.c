@@ -56,13 +56,11 @@ void menu_principal() {
         printf("---------------------------------------------------------------------\n");
         printf("|2| -        Ver biblioteca y escoger un manga para leer        - |2|\n");
         printf("---------------------------------------------------------------------\n");
-        printf("|3| -          Cuantas paginas me faltan para terminar?         - |3|\n");
+        printf("|3| -              Ver disponibilidad del manga                 - |3|\n");
         printf("---------------------------------------------------------------------\n");
-        printf("|4| -           Cuantos tomos me faltan para terminar?          - |4|\n");
+        printf("|4| -                     Devolver manga                        - |4|\n");
         printf("---------------------------------------------------------------------\n");
-        printf("|5| -               Colocar tomo en la biblioteca               - |5|\n");
-        printf("---------------------------------------------------------------------\n");
-        printf("|6| -                           Salir                           - |6|\n");
+        printf("|5| -                           Salir                           - |5|\n");
         printf("---------------------------------------------------------------------\n");
         do {
             printf("\n--------------------------------------------\n");
@@ -84,7 +82,11 @@ void menu_principal() {
                 ver_y_escojer_manga();
                 break;
 
-            /* Otros casos del menú aquí */
+          /*  case 3:
+                system("cls");
+
+                break;
+            Otros casos del menú aquí */
         }
 
     } while (op != 6);
