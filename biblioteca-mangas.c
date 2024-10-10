@@ -17,15 +17,8 @@ struct manga {
     int colocado;
 };
 
-struct manga_leido_no_leido {
-    char nombre[50];
-    int nro_tomo;
-    int cantidad_paginas_leidas;
-    int colocar;
-};
-
 struct manga biblioteca[TOTAL_MANGAS];
-struct manga leido_no_leido_lista_leidos[TOTAL_MANGAS_POR_LEER];
+
 void menu_principal();
 void cargar_biblioteca();
 struct manga* agregar_a_la_biblioteca(struct manga*, int*);
@@ -36,9 +29,11 @@ int verificar_estantes_vacios(struct manga*, int*);
 int busca_manga_y_tomo(struct manga*, char*, int*, int);
 
 int main() {
+
     for (int i = 0; i < TOTAL_MANGAS; i++) {
         biblioteca[i].colocado = 0;
     }
+
     menu_principal();
     return 0;
 }
@@ -48,28 +43,29 @@ void menu_principal() {
 
     do {
         system("cls");
-        printf("BIBLIOTECA MANGAS\n");
-        printf("=================\n\n");
-        printf("MENU PRINCIPAL\n\n");
-        printf("---------------------------------------------------------------------\n");
-        printf("|1| -                    Cargar biblioteca                      - |1|\n");
-        printf("---------------------------------------------------------------------\n");
-        printf("|2| -        Ver biblioteca y escoger un manga para leer        - |2|\n");
-        printf("---------------------------------------------------------------------\n");
-        printf("|3| -              Ver disponibilidad del manga                 - |3|\n");
-        printf("---------------------------------------------------------------------\n");
-        printf("|4| -                     Devolver manga                        - |4|\n");
-        printf("---------------------------------------------------------------------\n");
-        printf("|5| -                           Salir                           - |5|\n");
-        printf("---------------------------------------------------------------------\n");
+        printf("\n BIBLIOTECA MANGAS\n");
+        printf(" =================\n");
+        printf("\n MENU PRINCIPAL \n");
+        printf(" -------------- \n");
+        printf(" ---------------------------------------------------------------------\n");
+        printf(" |1| -                    Cargar biblioteca                      - |1|\n");
+        printf(" ---------------------------------------------------------------------\n");
+        printf(" |2| -        Ver biblioteca y escoger un manga para leer        - |2|\n");
+        printf(" ---------------------------------------------------------------------\n");
+        printf(" |3| -              Ver disponibilidad del manga                 - |3|\n");
+        printf(" ---------------------------------------------------------------------\n");
+        printf(" |4| -                     Devolver manga                        - |4|\n");
+        printf(" ---------------------------------------------------------------------\n");
+        printf(" |5| -                           Salir                           - |5|\n");
+        printf(" ---------------------------------------------------------------------\n");
         do {
             printf("\n--------------------------------------------\n");
             printf("Seleccione una opcion valida < 1 y 6> : ");
             scanf("%i", &op);
-            if (op < 1 || op > 6) {
+            if (op < 1 || op > 5) {
                 printf("\n X opcion no valida, intente de nuevo X \n");
             }
-        } while (op < 1 || op > 6);
+        } while (op < 1 || op > 5);
 
         switch (op) {
             case 1:
@@ -89,7 +85,7 @@ void menu_principal() {
             Otros casos del menú aquí */
         }
 
-    } while (op != 6);
+    } while (op != 5);
 }
 
 void cargar_biblioteca() {
