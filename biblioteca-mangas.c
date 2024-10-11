@@ -80,23 +80,23 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
         printf(" -----------\n");
         printf("\n + Ingrese nombre del manga: ");
         fgets(biblioteca[i].nombre,sizeof(biblioteca[i].nombre),stdin);
-        biblioteca[i].nombre[strcspn(biblioteca[i].nombre," \n")] = '\0';
+        biblioteca[i].nombre[strcspn(biblioteca[i].nombre,"\n")] = '\0';
         if(strcmp(biblioteca[i].nombre,"*") == 0){
             cantidad_estantes_disponibles = TODOS_LOS_MANGAS - cantidad_mangas_cargados;
             break;
         } else{
             printf("\n + Ingrese autor del manga: ");
             fgets(biblioteca[i].autor,sizeof(biblioteca[i].autor),stdin);
-            biblioteca[i].autor[strcspn(biblioteca[i].autor," \n")] = '\0';
+            biblioteca[i].autor[strcspn(biblioteca[i].autor,"\n")] = '\0';
             printf("\n + Ingrese editorial del manga: ");
             fgets(biblioteca[i].editorial,sizeof(biblioteca[i].editorial),stdin);
-            biblioteca[i].editorial[strcspn(biblioteca[i].editorial," \n")] = '\0';
+            biblioteca[i].editorial[strcspn(biblioteca[i].editorial,"\n")] = '\0';
             do{
                 fflush(stdin);
                 inicializar_cad_isbn(cad_isbn);
                 printf("\n + Ingrese ISBN del manga: ");
                 fgets(cad_isbn,sizeof(cad_isbn),stdin);
-                cad_isbn[strcspn(cad_isbn," \n")] = '\0';
+                cad_isbn[strcspn(cad_isbn,"\n")] = '\0';
                 long_isbn = strlen(cad_isbn);
                 if(long_isbn != 13){
                     printf("\n x ERROR. EL ISBN DEBE CONTENER EXACTAMENTE 13 digitos x \n");
@@ -143,12 +143,12 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
     int i;
 
-    printf("\n         BIBLIOTECA ACTUAL           \n");
-    printf("\n NOMBRE\t AUTOR\t EDITORIAL\t ISBN\t \n");
-    printf("---------------------------------------\n");
+    printf("\n                  BIBLIOTECA ACTUAL               \n");
+    printf("\n NOMBRE\t\t\t AUTOR\t\t\t EDITORIAL\t\ ISBN\t\t\t \n");
+    printf("------------------------------------------------------------------------\n");
     for(i = 0; i < *mangas_cargados; i++){
-        printf(" %s\t %s\t %s\t %s\t",biblioteca[i].nombre,biblioteca[i].autor,biblioteca[i].autor,biblioteca[i].editorial,biblioteca[i].isbn);
-        printf("\n");
+        printf(" %s\t\t %s\t\t %s\t\t %s\t",biblioteca[i].nombre,biblioteca[i].autor,biblioteca[i].editorial,biblioteca[i].isbn);
+        printf("\n\n");
     }
     printf("\n");
     system("pause");
