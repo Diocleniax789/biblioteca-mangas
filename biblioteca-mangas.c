@@ -77,7 +77,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
         printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE * \n");
         printf("======================================================================================== \n");
         printf("\n MANGA NRO %i\n", i + 1);
-        printf("   ------------\n");
+        printf(" -----------\n");
         printf("\n + Ingrese nombre del manga: ");
         fgets(biblioteca[i].nombre,sizeof(biblioteca[i].nombre),stdin);
         biblioteca[i].nombre[strcspn(biblioteca[i].nombre," \n")] = '\0';
