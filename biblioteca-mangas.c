@@ -12,14 +12,46 @@ struct manga{
     int disponibilidad;
 };
 
-void cargar_biblioteca(struct manga*,int*);
+int cargar_biblioteca(struct manga*,int*);
 void inicializar_cad_isbn(char*);
+void ver_alquilar_manga(struct manga*,int*);
 
 int main(){
-    int todos_los_mangas = TODOS_LOS_MANGAS;
+    int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados;
     struct manga biblioteca[TODOS_LOS_MANGAS];
+    int op;
 
-    cargar_biblioteca(biblioteca,&todos_los_mangas);
+    mangas_cargados = cargar_biblioteca(biblioteca,&todos_los_mangas);
+
+    do{
+        system("cls");
+        printf("\n * BIBLIOTECA DE MANGAS * \n");
+        printf("   ======================== \n");
+        printf("\n - Menu Principal - \n");
+        printf("\n");
+        printf("\n |1| - Ver y alquilar manga/s. \n");
+        printf("\n |2| - Ordenar mangas. \n");
+        printf("\n |3| - Consultar mangas faltantes. \n");
+        printf("\n |4| - Realizar devolucion de manga. \n");
+        printf("\n |5| - Salir. \n");
+        printf("\n");
+        do{
+
+            fflush(stdin);
+            printf("\n - Seleccione opcion: ");
+            scanf("%i",&op);
+            if(op < 1 || op > 5){
+                printf("\n x ERROR. INGRESE UN NUMERO ENTRE EL RANDO DE 1 Y 5 x \n");
+            }
+        } while(op < 1 || op > 5);
+        switch(op){
+            case 1:
+                system("cls");
+                ver_alquilar_manga(biblioteca,&mangas_cargados);
+            break;
+        }
+
+    } while(op != 5);
 
     return 0;
 }
@@ -31,7 +63,7 @@ void inicializar_cad_isbn(char *cad_isbn){
     }
 }
 
-void cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
+int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
     int i,long_isbn,cantidad_estantes_disponibles,cantidad_mangas_cargados,flag;
     static char cad_isbn[14],op;
 
@@ -92,7 +124,6 @@ void cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
             }
         } while(op != 's' && op != 'n');
 
-
     } else{
         flag = 1;
         printf("\n x YA NO QUEDAN ESPACIOS DISPONIBLES x \n");
@@ -104,7 +135,23 @@ void cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 
     } while(op != 'n' && flag == 0);
 
+    if(op == 'n'){
+        return cantidad_mangas_cargados;
+    }
 }
 
+void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
+    int i;
 
+    printf("\n         BIBLIOTECA ACTUAL           \n");
+    printf("\n NOMBRE\t AUTOR\t EDITORIAL\t ISBN\t \n");
+    printf("---------------------------------------\n");
+    for(i = 0; i < *mangas_cargados; i++){
+        printf(" %s\t %s\t %s\t %s\t",biblioteca[i].nombre,biblioteca[i].autor,biblioteca[i].autor,biblioteca[i].editorial,biblioteca[i].isbn);
+        printf("\n");
+    }
+    printf("\n");
+    system("pause");
+
+}
 
