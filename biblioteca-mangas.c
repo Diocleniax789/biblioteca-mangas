@@ -174,7 +174,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
         flag = 0;
         pos = 0;
         do{
-            if(strcmp(nombre,biblioteca[pos].nombre) == 0){
+            if(strcmp(nombre,biblioteca[pos].nombre) == 0 && biblioteca[pos].disponibilidad == 1){
                 flag = 1;
                 break;
             } else{
@@ -186,13 +186,13 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
             biblioteca[pos].disponibilidad = 0;
             printf("\n *** DISFRUTE DE UNA BUENA LECTURA! *** \n");
         } else{
-            printf("\n x MANGA NO ENCONTRADO O NO DISPONIBLE xas \n");
+            printf("\n x MANGA NO ENCONTRADO O NO DISPONIBLE x \n");
         }
 
         do{
             fflush(stdin);
             printf("\n - Desea llevarse otro? Ingrese < s | n >: ");
-            scanf("%c",&op2);
+            scanf("%c",&op);
             if(op != 's' && op != 'n'){
                 printf("\n x ERROR. INGRESE s O n x \n");
             }
