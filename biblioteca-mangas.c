@@ -118,7 +118,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 
         do{
             fflush(stdin);
-            printf("\n - Deseas seguir agregando mas mangas? Ingrese <s | n > : ");
+            printf("\n - Deseas seguir agregando mas mangas? Ingrese < s | n > : ");
             scanf("%c",&op);
             if(op != 's' && op != 'n'){
                 printf("\n x ERROR. INGRESE s O n. x \n");
@@ -186,7 +186,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
             biblioteca[pos].disponibilidad = 0;
             printf("\n *** DISFRUTE DE UNA BUENA LECTURA! *** \n");
         } else{
-            printf("\n x MANGA NO ENCONTRADO x \n");
+            printf("\n x MANGA NO ENCONTRADO O NO DISPONIBLE xas \n");
         }
 
         do{
