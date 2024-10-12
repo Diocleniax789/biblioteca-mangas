@@ -16,6 +16,7 @@ struct manga{
 int cargar_biblioteca(struct manga*,int*);
 void inicializar_cad_isbn(char*);
 void ver_alquilar_manga(struct manga*,int*);
+void ordena_mangas_por_tomo(struct manga*,int*);
 
 int main(){
     int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados,todos_los_clientes = TODOS_LOS_CLIENTES;
@@ -23,6 +24,7 @@ int main(){
     int op;
 
     mangas_cargados = cargar_biblioteca(biblioteca,&todos_los_mangas);
+    ordena_mangas_por_tomo(biblioteca,&mangas_cargados);
 
     do{
         system("cls");
@@ -31,28 +33,28 @@ int main(){
         printf("\n - Menu Principal - \n");
         printf("\n");
         printf("\n |1| - Ver y alquilar manga/s. \n");
-        printf("\n |2| - Ordenar mangas. \n");
-        printf("\n |3| - Consultar mangas faltantes. \n");
-        printf("\n |4| - Realizar devolucion de manga. \n");
-        printf("\n |5| - Salir. \n");
+        printf("\n |2| - Consultar mangas faltantes. <no disponible> \n");
+        printf("\n |3| - Realizar devolucion de manga. <no disponible> \n");
+        printf("\n |4| - Salir. \n");
         printf("\n");
         do{
 
             fflush(stdin);
             printf("\n - Seleccione opcion: ");
             scanf("%i",&op);
-            if(op < 1 || op > 5){
-                printf("\n x ERROR. INGRESE UN NUMERO ENTRE EL RANDO DE 1 Y 5 x \n");
+            if(op < 1 || op > 4){
+                printf("\n x ERROR. INGRESE UN NUMERO ENTRE EL RANDO DE 1 Y 4 x \n");
             }
-        } while(op < 1 || op > 5);
+        } while(op < 1 || op > 4);
         switch(op){
             case 1:
                 system("cls");
                 ver_alquilar_manga(biblioteca,&mangas_cargados);
             break;
+
         }
 
-    } while(op != 5);
+    } while(op != 4);
 
     return 0;
 }
@@ -272,3 +274,26 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
   } while(op != 'n');
 }
 
+void ordena_mangas_por_tomo(struct manga *biblioteca, int *mangas_cargados){
+    int i,j;
+    char nombre_manga_aux[50], autor_manga_aux[50], editorial_manga_aux[50],isbn_aux[14];
+
+    for(i = 0; i < *mangas_cargados - 1; i++){
+        for(j = i + 1; j < *mangas_cargados; j++){
+            if(strcmp(biblioteca[i].nombre,biblioteca[j].nombre) > 0){
+                strcpy(nombre_manga_aux,biblioteca[i].nombre);
+                strcpy(autor_manga_aux,biblioteca[i].autor);
+                strcpy(editorial_manga_aux,biblioteca[i].editorial);
+                strcpy(isbn_aux,biblioteca[i].isbn);
+                strcpy(biblioteca[i].nombre,biblioteca[j].nombre);
+                strcpy(biblioteca[i].autor,biblioteca[j].autor);
+                strcpy(biblioteca[i].editorial,biblioteca[j].editorial);
+                strcpy(biblioteca[i].isbn,biblioteca[j].isbn);
+                strcpy(biblioteca[j].nombre,nombre_manga_aux);
+                strcpy(biblioteca[j].autor,autor_manga_aux);
+                strcpy(biblioteca[j].editorial,editorial_manga_aux);
+                strcpy(biblioteca[j].isbn,isbn_aux);
+            }
+        }
+    }
+}
