@@ -75,10 +75,10 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
     for(i = 0; i < *todos_los_mangas; i++){
         system("cls");
         fflush(stdin);
-        printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE * \n");
+        printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE '*' \n");
         printf("======================================================================================== \n");
         printf("\n ESPACIO NRO %i\n", i + 1);
-        printf(" -----------\n");
+        printf(" -------------\n");
         printf("\n + Ingrese nombre del manga: ");
         fgets(biblioteca[i].nombre,sizeof(biblioteca[i].nombre),stdin);
         biblioteca[i].nombre[strcspn(biblioteca[i].nombre,"\n")] = '\0';
@@ -100,7 +100,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
                 cad_isbn[strcspn(cad_isbn,"\n")] = '\0';
                 long_isbn = strlen(cad_isbn);
                 if(long_isbn != 13){
-                    printf("\n x ERROR. EL ISBN DEBE CONTENER EXACTAMENTE 13 digitos x \n");
+                    printf("\n x ERROR. EL ISBN DEBE CONTENER EXACTAMENTE 13 DIGITOS x \n");
                 }
             } while(long_isbn != 13);
             strcpy(biblioteca[i].isbn,cad_isbn);
@@ -130,10 +130,10 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
         do{
             system("cls");
             fflush(stdin);
-            printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE * \n");
+            printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE '*' \n");
             printf("======================================================================================== \n");
             printf("\n ESPACIO NRO %i\n", cantidad_mangas_cargados + 1);
-            printf(" -----------\n");
+            printf(" -------------\n");
             printf("\n + Ingrese nombre del manga: ");
             fgets(biblioteca[cantidad_mangas_cargados].nombre,sizeof(biblioteca[cantidad_mangas_cargados].nombre),stdin);
             biblioteca[cantidad_mangas_cargados].nombre[strcspn(biblioteca[cantidad_mangas_cargados].nombre,"\n")] = '\0';
@@ -152,7 +152,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
                     cad_isbn[strcspn(cad_isbn,"\n")] = '\0';
                     long_isbn = strlen(cad_isbn);
                     if(long_isbn != 13){
-                        printf("\n x ERROR. EL ISBN DEBE CONTENER EXACTAMENTE 13 digitos x \n");
+                        printf("\n x ERROR. EL ISBN DEBE CONTENER EXACTAMENTE 13 DIGITOS x \n");
                     }
                 } while(long_isbn != 13);
                     strcpy(biblioteca[cantidad_mangas_cargados].isbn,cad_isbn);
@@ -165,7 +165,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 
               system("cls");
               fflush(stdin);
-              printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE * \n");
+              printf("\n SI QUIERE FINALIZAR CON LA CARGA, A LA HORA DE USAR EL NOMBRE, SIMPLEMENTE COLOQUE '*' \n");
               printf("======================================================================================== \n");
               printf("\n ESPACIO NRO %i\n", cantidad_mangas_cargados + 1);
               printf(" -----------\n");
@@ -182,7 +182,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
                 printf("\n - Deseas seguir agregando mas mangas? Ingrese < s | n > : ");
                 scanf("%c",&op);
                 if(op != 's' && op != 'n'){
-                    printf("\n x ERROR. INGRESE s O n. x \n");
+                    printf("\n x ERROR. INGRESE 's' O 'n' x \n");
                 }
              } while(op != 's' && op != 'n');
 
@@ -195,7 +195,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
         flag = 1;
         printf("\n x YA NO QUEDAN ESPACIOS DISPONIBLES x \n");
         printf("\n");
-        printf("\n *** TODOS LOS MANGAS HAN SIDO CARGADOS CORRECTAMENTE ** \n");
+        printf("\n *** TODOS LOS MANGAS HAN SIDO CARGADOS CORRECTAMENTE *** \n");
         printf("\n");
         system("pause");
     }
@@ -209,7 +209,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 
 void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
     int i,pos,flag;
-    char op,nombre[50],op2;
+    char op,nombre[50];
 
     printf("\n                              BIBLIOTECA ACTUAL               \n");
     printf("                              =================               \n");
@@ -228,7 +228,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
         printf("\n Desea llevar algun manga? Ingese < s | n > : ");
         scanf("%c",&op);
         if(op != 's' && op != 'n'){
-                printf("\n x ERROR. DEBE INGRESAR s O n x \n");
+                printf("\n x ERROR. DEBE INGRESAR 's' O 'n' x \n");
         }
     } while(op != 's' && op != 'n');
     if(op == 's'){
@@ -262,7 +262,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
             printf("\n - Desea llevarse otro? Ingrese < s | n >: ");
             scanf("%c",&op);
             if(op != 's' && op != 'n'){
-                printf("\n x ERROR. INGRESE s O n x \n");
+                printf("\n x ERROR. INGRESE 's' O 'n' x \n");
             }
         } while(op != 's' && op != 'n');
 
