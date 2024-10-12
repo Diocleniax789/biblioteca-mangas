@@ -114,7 +114,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
     }
 
     if(cantidad_estantes_disponibles > cantidad_mangas_cargados){
-        printf("\n # AUN QUEDAN %i DISPONIBLES # \n",cantidad_estantes_disponibles);
+        printf("\n # AUN QUEDAN %i ESPACIOS DISPONIBLES # \n",cantidad_estantes_disponibles);
 
         do{
             fflush(stdin);
@@ -145,9 +145,11 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
     int i,pos,flag;
     char op,nombre[50],op2;
 
-    printf("\n                  BIBLIOTECA ACTUAL               \n");
-    printf("\n NOMBRE\t\t\t AUTOR\t\t\t EDITORIAL\t ISBN\t\t\t \n");
-    printf("------------------------------------------------------------------------\n");
+    printf("\n                              BIBLIOTECA ACTUAL               \n");
+    printf("                              =================               \n");
+    printf("----------------------------------------------------------------------\n");
+    printf(" NOMBRE\t\t\t AUTOR\t\t\t EDITORIAL\t ISBN\t\t\t \n");
+    printf("----------------------------------------------------------------------\n");
     for(i = 0; i < *mangas_cargados; i++){
         printf(" %s\t\t %s\t\t %s\t\t %s\t",biblioteca[i].nombre,biblioteca[i].autor,biblioteca[i].editorial,biblioteca[i].isbn);
         printf("\n\n");
@@ -202,6 +204,5 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
   }
 
   } while(op != 'n');
-
 }
 
