@@ -144,7 +144,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
     int i;
 
     printf("\n                  BIBLIOTECA ACTUAL               \n");
-    printf("\n NOMBRE\t\t\t AUTOR\t\t\t EDITORIAL\t\ ISBN\t\t\t \n");
+    printf("\n NOMBRE\t\t\t AUTOR\t\t\t EDITORIAL\t ISBN\t\t\t \n");
     printf("------------------------------------------------------------------------\n");
     for(i = 0; i < *mangas_cargados; i++){
         printf(" %s\t\t %s\t\t %s\t\t %s\t",biblioteca[i].nombre,biblioteca[i].autor,biblioteca[i].editorial,biblioteca[i].isbn);
