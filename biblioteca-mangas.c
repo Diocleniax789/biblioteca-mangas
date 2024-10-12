@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define TODOS_LOS_MANGAS 500
+#define TODOS_LOS_CLIENTES 100000
 
 struct manga{
     char nombre[50];
@@ -17,7 +18,7 @@ void inicializar_cad_isbn(char*);
 void ver_alquilar_manga(struct manga*,int*);
 
 int main(){
-    int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados;
+    int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados,todos_los_clientes = TODOS_LOS_CLIENTES;
     struct manga biblioteca[TODOS_LOS_MANGAS];
     int op;
 
@@ -141,7 +142,8 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 }
 
 void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
-    int i;
+    int i,pos,flag;
+    char op,nombre[50],op2;
 
     printf("\n                  BIBLIOTECA ACTUAL               \n");
     printf("\n NOMBRE\t\t\t AUTOR\t\t\t EDITORIAL\t ISBN\t\t\t \n");
@@ -151,7 +153,55 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
         printf("\n\n");
     }
     printf("\n");
-    system("pause");
+
+  do{
+    do{
+        fflush(stdin);
+        printf("\n Desea llevar algun manga? Ingese < s | n > : ");
+        scanf("%c",&op);
+        if(op != 's' && op != 'n'){
+                printf("\n x ERROR. DEBE INGRESAR s O n x \n");
+        }
+    } while(op != 's' && op != 'n');
+    if(op == 's'){
+     do {
+        fflush(stdin);
+        printf("\n PARA REALIZAR UNA BUSQUEDA ESCRIBA EL NOMBRE DEL MANGA JUNTO A SU NRO DE TOMO. EJ: MANGA #02 \n");
+        printf("------------------------------------------------------------------------------------------------ \n");
+        printf("\n + Escriba el nombre aqui: ");
+        fgets(nombre,sizeof(nombre),stdin);
+        nombre[strcspn(nombre,"\n")] = '\0';
+        flag = 0;
+        pos = 0;
+        do{
+            if(strcmp(nombre,biblioteca[pos].nombre) == 0){
+                flag = 1;
+                break;
+            } else{
+                pos++;
+            }
+        } while(pos < *mangas_cargados && flag == 0);
+        if(flag == 1){
+            printf("\n *** MANGA ENCONTRADO *** \n");
+            biblioteca[pos].disponibilidad = 0;
+            printf("\n *** DISFRUTE DE UNA BUENA LECTURA! *** \n");
+        } else{
+            printf("\n x MANGA NO ENCONTRADO x \n");
+        }
+
+        do{
+            fflush(stdin);
+            printf("\n - Desea llevarse otro? Ingrese < s | n >: ");
+            scanf("%c",&op2);
+            if(op != 's' && op != 'n'){
+                printf("\n x ERROR. INGRESE s O n x \n");
+            }
+        } while(op != 's' && op != 'n');
+
+    } while(op != 'n');
+  }
+
+  } while(op != 'n');
 
 }
 
