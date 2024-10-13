@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define TODOS_LOS_MANGAS 500
-#define TODOS_LOS_CLIENTES 100000
+#define TODOS_LOS_CLIENTES 500
 
 struct manga{
     char nombre[50];
@@ -13,15 +13,23 @@ struct manga{
     int disponibilidad;
 };
 
+struct cliente{
+    char nombre[50];
+    char apellido[50];
+    char nombre_manga[50];
+    char fecha_alquiler[11];
+};
+
 int cargar_biblioteca(struct manga*,int*);
 void inicializar_cad_isbn(char*);
-void ver_alquilar_manga(struct manga*,int*);
+void ver_alquilar_manga(struct manga*,int*,struct cliente*,int*);
 void ordena_mangas_por_tomo(struct manga*,int*);
 void consultar_libros(struct manga*,int*);
 
 int main(){
     int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados,todos_los_clientes = TODOS_LOS_CLIENTES;
     struct manga biblioteca[TODOS_LOS_MANGAS];
+    struct cliente clientes[TODOS_LOS_CLIENTES];
     int op;
 
 
@@ -51,13 +59,18 @@ int main(){
         switch(op){
             case 1:
                 system("cls");
-                ver_alquilar_manga(biblioteca,&mangas_cargados);
+                ver_alquilar_manga(biblioteca,&mangas_cargados,clientes,&todos_los_clientes);
             break;
 
             case 2:
                 system("cls");
                 consultar_libros(biblioteca,&mangas_cargados);
             break;
+
+         /*   case 3:
+                system("cls");
+                devoluciones_libros(biblioteca,&mangas_cargados,clientes,&todos_los_clientes);
+            break;*/
 
         }
 
@@ -216,8 +229,8 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
     }
 }
 
-void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
-    int i,pos,flag;
+void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados,struct cliente* clientes, int *todos_los_clientes){
+    int i,pos,flag,j;
     char op,nombre[50];
 
     printf("\n                              BIBLIOTECA ACTUAL               \n");
@@ -241,6 +254,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
         }
     } while(op != 's' && op != 'n');
     if(op == 's'){
+     j = 0;
      do {
         fflush(stdin);
         printf("\n PARA REALIZAR UNA BUSQUEDA ESCRIBA EL NOMBRE DEL MANGA JUNTO A SU NRO DE TOMO. EJ: MANGA #02 \n");
@@ -261,6 +275,19 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
         if(flag == 1){
             printf("\n *** MANGA ENCONTRADO *** \n");
             biblioteca[pos].disponibilidad = 0;
+            if( j < *todos_los_clientes){
+                printf("\n CARGA DE DATOS DEL CLIENTE \n");
+                printf("\n + Ingrese nombre del cliente: ");
+                fgets(clientes[j].nombre,sizeof(clientes[j].nombre),stdin);
+                clientes[j].nombre[strcspn(clientes[j].nombre,"\n")] = '\0';
+                printf("\n + Ingrese apellido del cliente: ");
+                fgets(clientes[j].apellido,sizeof(clientes[j].apellido),stdin);
+                clientes[j].apellido[strcspn(clientes[j].apellido,"\n")] = '\0';
+                printf("\n + Ingrese nombre del manga: ");
+                fgets(clientes[j].nombre_manga,sizeof(clientes[j].nombre_manga),stdin);
+                clientes[j].nombre_manga[strcspn(clientes[j].nombre_manga,"\n")] = '\0';
+                j++;
+            }
             printf("\n *** DISFRUTE DE UNA BUENA LECTURA! *** \n");
         } else{
             printf("\n x MANGA NO ENCONTRADO O NO DISPONIBLE x \n");
@@ -268,7 +295,7 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados){
 
         do{
             fflush(stdin);
-            printf("\n - Desea llevarse otro? Ingrese < s | n >: ");
+            printf("\n - Desea llevarse otro? Ingrese < s | n > : ");
             scanf("%c",&op);
             if(op != 's' && op != 'n'){
                 printf("\n x ERROR. INGRESE 's' O 'n' x \n");
@@ -324,3 +351,4 @@ void consultar_libros(struct manga *biblioteca, int *mangas_cargados){
     printf("\n");
     system("pause");
 }
+
