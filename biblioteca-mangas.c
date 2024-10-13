@@ -17,11 +17,13 @@ int cargar_biblioteca(struct manga*,int*);
 void inicializar_cad_isbn(char*);
 void ver_alquilar_manga(struct manga*,int*);
 void ordena_mangas_por_tomo(struct manga*,int*);
+void consultar_libros(struct manga*,int*);
 
 int main(){
     int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados,todos_los_clientes = TODOS_LOS_CLIENTES;
     struct manga biblioteca[TODOS_LOS_MANGAS];
     int op;
+
 
     mangas_cargados = cargar_biblioteca(biblioteca,&todos_los_mangas);
     ordena_mangas_por_tomo(biblioteca,&mangas_cargados);
@@ -33,7 +35,7 @@ int main(){
         printf("\n - Menu Principal - \n");
         printf("\n");
         printf("\n |1| - Ver y alquilar manga/s. \n");
-        printf("\n |2| - Consultar mangas faltantes. <no disponible> \n");
+        printf("\n |2| - Consultar mangas faltantes. \n");
         printf("\n |3| - Realizar devolucion de manga. <no disponible> \n");
         printf("\n |4| - Salir. \n");
         printf("\n");
@@ -50,6 +52,11 @@ int main(){
             case 1:
                 system("cls");
                 ver_alquilar_manga(biblioteca,&mangas_cargados);
+            break;
+
+            case 2:
+                system("cls");
+                consultar_libros(biblioteca,&mangas_cargados);
             break;
 
         }
@@ -296,4 +303,24 @@ void ordena_mangas_por_tomo(struct manga *biblioteca, int *mangas_cargados){
             }
         }
     }
+}
+
+void consultar_libros(struct manga *biblioteca, int *mangas_cargados){
+    int i,pos,flag;
+    char nombre[50];
+
+    for(i = 0; i < *mangas_cargados; i++){
+        if(biblioteca[i].disponibilidad == 0){
+            printf("\n - NOMBRE: %s",biblioteca[i].nombre);
+            printf("\n - AUTOR: %s",biblioteca[i].autor);
+            printf("\n - EDITORIAL: %s",biblioteca[i].editorial);
+            printf("\n - ISBN: %s",biblioteca[i].isbn);
+            printf("\n x NO DISPONIBLE x \n");
+        }
+
+        printf("\n");
+    }
+
+    printf("\n");
+    system("pause");
 }
