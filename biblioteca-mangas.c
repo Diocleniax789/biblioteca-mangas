@@ -25,6 +25,7 @@ void inicializar_cad_isbn(char*);
 void ver_alquilar_manga(struct manga*,int*,struct cliente*,int*);
 void ordena_mangas_por_tomo(struct manga*,int*);
 void consultar_libros(struct manga*,int*);
+char *cargar_fecha();
 
 int main(){
     int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados,todos_los_clientes = TODOS_LOS_CLIENTES;
@@ -67,7 +68,7 @@ int main(){
                 consultar_libros(biblioteca,&mangas_cargados);
             break;
 
-         /*   case 3:
+          /*  case 3:
                 system("cls");
                 devoluciones_libros(biblioteca,&mangas_cargados,clientes,&todos_los_clientes);
             break;*/
@@ -231,7 +232,7 @@ int cargar_biblioteca(struct manga *biblioteca, int *todos_los_mangas){
 
 void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados,struct cliente* clientes, int *todos_los_clientes){
     int i,pos,flag,j;
-    char op,nombre[50];
+    char op,nombre[50],*fecha;
 
     printf("\n                              BIBLIOTECA ACTUAL               \n");
     printf("                              =================               \n");
@@ -286,6 +287,17 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados,struct cl
                 printf("\n + Ingrese nombre del manga: ");
                 fgets(clientes[j].nombre_manga,sizeof(clientes[j].nombre_manga),stdin);
                 clientes[j].nombre_manga[strcspn(clientes[j].nombre_manga,"\n")] = '\0';
+
+                do{
+                    fflush(stdin);
+                    fecha = cargar_fecha();
+                    if(strcmp(fecha,"ERROR") == 0){
+                        printf("\n x LA FECHA DEBE CONTENER 3 '/' x \n");
+                    }
+                } while(strcmp(fecha,"ERROR") == 0);
+
+                strcpy(clientes[j].fecha_alquiler,fecha);
+
                 j++;
             }
             printf("\n *** DISFRUTE DE UNA BUENA LECTURA! *** \n");
@@ -352,3 +364,26 @@ void consultar_libros(struct manga *biblioteca, int *mangas_cargados){
     system("pause");
 }
 
+char *cargar_fecha(){
+    static char fecha[11];
+    char delim[] = "/", *token;
+    int cont_delim;
+
+    printf("\n + Cargue fecha de alquiler: ");
+    fgets(fecha,sizeof(fecha),stdin);
+    fecha[strcspn(fecha,"\n")] = '\0';
+
+    token = strtok(fecha,delim);
+    cont_delim = 0;
+    while(token != NULL){
+         cont_delim++;
+        token = strtok(NULL,delim);
+    }
+
+    if(cont_delim == 3){
+        return fecha;
+
+    } else {
+        return "ERROR";
+    }
+}
