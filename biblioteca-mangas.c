@@ -4,6 +4,7 @@
 
 #define TODOS_LOS_MANGAS 500
 #define TODOS_LOS_CLIENTES 500
+#define MULTA 12.500
 
 struct manga{
     char nombre[50];
@@ -26,6 +27,7 @@ void ver_alquilar_manga(struct manga*,int*,struct cliente*,int*);
 void ordena_mangas_por_tomo(struct manga*,int*);
 void consultar_libros(struct manga*,int*);
 char *cargar_fecha();
+void devolucion_libros(struct manga*,int*,struct cliente*,int*);
 
 int main(){
     int todos_los_mangas = TODOS_LOS_MANGAS,mangas_cargados,todos_los_clientes = TODOS_LOS_CLIENTES;
@@ -68,10 +70,10 @@ int main(){
                 consultar_libros(biblioteca,&mangas_cargados);
             break;
 
-          /*  case 3:
+            case 3:
                 system("cls");
                 devoluciones_libros(biblioteca,&mangas_cargados,clientes,&todos_los_clientes);
-            break;*/
+            break;
 
         }
 
@@ -388,3 +390,41 @@ char *cargar_fecha(){
         return "ERROR";
     }
 }
+
+void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cliente *clientes, int *todos_los_clientes){
+    char nombre[50],*fecha;
+    int flag,pos;
+
+    do{
+        fflush(stdin);
+        printf("\n - PARA REALIZAR UNA DEVOLUCION, INDIQUE EL NOMBRE DEL CLIENTE - \n");
+        printf("-------------------------------------------------------------------\n");
+        printf("\n");
+        printf("\n + Ingrese nombre del cliente: ");
+        fgets(nombre,sizeof(nombre),stdin);
+        nombre[strcspn(nombre,"\n")] = '\0';
+        pos = 0;
+        flag = 0;
+        do{
+            if(strcmp(nombre,clientes[pos].nombre) == 0){
+                flag = 1;
+            } else{
+                pos++;
+            }
+        } while(pos < *todos_los_clientes && flag == 0);
+        if(flag == 1){
+            printf("\n * CLIENTE ENCONTRADO * \n");
+            printf("\n");
+            printf("\n - NOMBRE: %s",clientes[pos].nombre);
+            printf("\n - APELLIDO: %s",clientes[pos].apellido);
+            printf("\n - MANGA ALQUILADO: %s",clientes[pos].nombre_manga);
+            // aca quedamos
+
+        }
+
+
+    }
+
+
+}
+
