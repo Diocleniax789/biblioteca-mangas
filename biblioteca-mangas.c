@@ -289,6 +289,8 @@ void ver_alquilar_manga(struct manga *biblioteca, int *mangas_cargados,struct cl
                 clientes[j].nombre_manga[strcspn(clientes[j].nombre_manga,"\n")] = '\0';
 
                 do{
+                    printf("\n LA FECHA DEBERA TENER ESTE FORMATO DD/MM/YYYY \n");
+                    printf("--------------------------------------------------\n");
                     fflush(stdin);
                     fecha = cargar_fecha();
                     if(strcmp(fecha,"ERROR") == 0){
@@ -382,7 +384,6 @@ char *cargar_fecha(){
 
     if(cont_delim == 3){
         return fecha;
-
     } else {
         return "ERROR";
     }
