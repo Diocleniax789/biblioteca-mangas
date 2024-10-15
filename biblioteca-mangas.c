@@ -72,7 +72,7 @@ int main(){
 
             case 3:
                 system("cls");
-                devoluciones_libros(biblioteca,&mangas_cargados,clientes,&todos_los_clientes);
+                devolucion_libros(biblioteca,&mangas_cargados,clientes,&todos_los_clientes);
             break;
 
         }
@@ -392,8 +392,8 @@ char *cargar_fecha(){
 }
 
 void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cliente *clientes, int *todos_los_clientes){
-    char nombre[50],*fecha,*fecha_actual;
-    int flag,pos;
+    char nombre[50],*fecha,*fecha_actual,manga[50],op;
+    int flag,pos,pos2,flag2;
 
     do{
         fflush(stdin);
@@ -419,7 +419,7 @@ void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cl
             printf("\n # NOMBRE: %s",clientes[pos].nombre);
             printf("\n # APELLIDO: %s",clientes[pos].apellido);
             printf("\n # MANGA ALQUILADO: %s",clientes[pos].nombre_manga);
-            printf("\n # FECHA DE ALQUILER: %S",clientes[pos].fecha_alquiler);
+            printf("\n # FECHA DE ALQUILER: %s",clientes[pos].fecha_alquiler);
             printf("\n =============================================\n");
             printf("\n");
             do{
@@ -432,13 +432,41 @@ void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cl
                     printf("\n x LA FECHA DEBE CONTENER 3 '/' x \n");
                 }
             } while(strcmp(fecha_actual,"ERROR") == 0);
-            if(strcmp(fecha_actual,clientes[pos].fecha_alquiler) )
+            if(strcmp(fecha_actual,clientes[pos].fecha_alquiler) < 0){
+                printf("\n * A TIEMPO DE ENTREGA * \n");
+                strcpy(manga,clientes[pos].nombre_manga);
+                flag2 = 0;
+                pos2 = 0;
+                do{
+                    if(strcmp(manga,biblioteca[pos2].nombre) == 0 && biblioteca[pos2].disponibilidad == 0){
+                        flag2 = 1;
+                    } else{
+                        pos2++;
+                    }
+                } while(pos2 < *mangas_cargados && flag2 == 0);
 
+                if(flag2 == 1){
+                    biblioteca[pos2].disponibilidad = 1;
+                    printf("\n *** MANGA DEVUELTO EN TIEMPO Y FORMA *** \n");
+                }
 
-
+            } else{
+                printf("\n x FECHA DE ALQUILER VENCIDA. SE LE APLICARA UNA MULTA x \n");
+            }
+        } else{
+            printf("\n x CLIENTE NO ENCONTRADO x \n");
         }
-    }
 
+        do{
+            fflush(stdin);
+            printf("\n - Desea realizar otra devolucion? Ingrese < s | n > : ");
+            scanf("%c",&op);
+            if(op != 's' && op != 'n'){
+                printf("\n x ERROR. INGRESE 's' O 'n' x \n");
+            }
 
+        } while(op != 's' && op != 'n');
+
+    } while(op != 'n');
 }
 
