@@ -419,8 +419,10 @@ void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cl
             printf("\n # NOMBRE: %s",clientes[pos].nombre);
             printf("\n # APELLIDO: %s",clientes[pos].apellido);
             printf("\n # MANGA ALQUILADO: %s",clientes[pos].nombre_manga);
+            printf("\n # FECHA DE ALQUILER: %S",clientes[pos].fecha_alquiler);
             printf("\n =============================================\n");
-            // aca quedamos
+
+
 
         }
     }
