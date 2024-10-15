@@ -47,7 +47,7 @@ int main(){
         printf("\n");
         printf("\n |1| - Ver y alquilar manga/s. \n");
         printf("\n |2| - Consultar mangas faltantes. \n");
-        printf("\n |3| - Realizar devolucion de manga. <no disponible> \n");
+        printf("\n |3| - Realizar devolucion de manga. \n");
         printf("\n |4| - Salir. \n");
         printf("\n");
         do{
