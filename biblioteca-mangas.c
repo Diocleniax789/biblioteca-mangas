@@ -392,7 +392,7 @@ char *cargar_fecha(){
 }
 
 void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cliente *clientes, int *todos_los_clientes){
-    char nombre[50],*fecha;
+    char nombre[50],*fecha,*fecha_actual;
     int flag,pos;
 
     do{
@@ -421,6 +421,18 @@ void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cl
             printf("\n # MANGA ALQUILADO: %s",clientes[pos].nombre_manga);
             printf("\n # FECHA DE ALQUILER: %S",clientes[pos].fecha_alquiler);
             printf("\n =============================================\n");
+            printf("\n");
+            do{
+                printf("\n LA FECHA DEBERA TENER ESTE FORMATO DD/MM/YYYY \n");
+                printf("--------------------------------------------------\n");
+                fflush(stdin);
+                printf("\n FECHA ACTUAL: ");
+                fecha_actual = cargar_fecha();
+                if(strcmp(fecha_actual,"ERROR") == 0){
+                    printf("\n x LA FECHA DEBE CONTENER 3 '/' x \n");
+                }
+            } while(strcmp(fecha_actual,"ERROR") == 0);
+            if(strcmp(fecha_actual,clientes[pos].fecha_alquiler) )
 
 
 
