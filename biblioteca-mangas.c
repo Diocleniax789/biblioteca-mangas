@@ -415,14 +415,14 @@ void devolucion_libros(struct manga *biblioteca, int *mangas_cargados, struct cl
         if(flag == 1){
             printf("\n * CLIENTE ENCONTRADO * \n");
             printf("\n");
-            printf("\n - NOMBRE: %s",clientes[pos].nombre);
-            printf("\n - APELLIDO: %s",clientes[pos].apellido);
-            printf("\n - MANGA ALQUILADO: %s",clientes[pos].nombre_manga);
+            printf("\n =============================================\n");
+            printf("\n # NOMBRE: %s",clientes[pos].nombre);
+            printf("\n # APELLIDO: %s",clientes[pos].apellido);
+            printf("\n # MANGA ALQUILADO: %s",clientes[pos].nombre_manga);
+            printf("\n =============================================\n");
             // aca quedamos
 
         }
-
-
     }
 
 
